@@ -29,4 +29,10 @@ module.exports = {
       },
     }),
   ],
+  resolve: {
+    fallback: {
+      url: require.resolve("url/"),
+      events: false, // Use an empty module for events
+    },
+  },
 };
