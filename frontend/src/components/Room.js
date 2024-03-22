@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Grid, Button, Typography } from "@material-ui/core";
 import CreateRoomPage from "./CreateRoomPage";
-import MusicPlayer from "./musicplayer";
+import MusicPlayer from "./MusicPlayer";
+
 export default class Room extends Component {
   constructor(props) {
     super(props);
@@ -44,7 +45,7 @@ export default class Room extends Component {
       .then((data) => {
         this.setState({
           votesToSkip: data.votes_to_skip,
-          guestCanPause: data.guest_can_pause,
+          guestCanPause: data.guests_can_pause,
           isHost: data.is_host,
         });
         if (this.state.isHost) {
