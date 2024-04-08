@@ -13,15 +13,29 @@ import SkipNextIcon from "@material-ui/icons/SkipNext";
 export default class MusicPlayer extends Component {
   constructor(props) {
     super(props);
+    // Binding event handler functions
+    this.skipSong = this.skipSong.bind(this);
+    this.pauseSong = this.pauseSong.bind(this);
+    this.playSong = this.playSong.bind(this);
+  }
+
+  skipSong() {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    };
+    fetch("/spotify/skip", requestOptions);
   }
 
   pauseSong() {
+    console.log("Pause song clicked"); // Log statement for debugging
     const requestOptions = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
     };
     fetch("/spotify/pause", requestOptions);
   }
+  
 
   playSong() {
     const requestOptions = {
@@ -38,7 +52,7 @@ export default class MusicPlayer extends Component {
       <Card>
         <Grid container alignItems="center">
           <Grid item align="center" xs={4}>
-            <img src={this.props.image_url} height="100%" width="100%" />
+            <img src={this.props.image_url} height="100%" width="100%" alt="Song cover" />
           </Grid>
           <Grid item align="center" xs={8}>
             <Typography component="h5" variant="h5">
@@ -55,7 +69,8 @@ export default class MusicPlayer extends Component {
               >
                 {this.props.is_playing ? <PauseIcon /> : <PlayArrowIcon />}
               </IconButton>
-              <IconButton>
+              <IconButton onClick={this.skipSong}>
+                {this.props.votes} / {this.props.votes_required}
                 <SkipNextIcon />
               </IconButton>
             </div>

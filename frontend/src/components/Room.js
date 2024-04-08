@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Grid, Button, Typography } from "@material-ui/core";
 import CreateRoomPage from "./CreateRoomPage";
-import MusicPlayer from "./MusicPlayer";
+import MusicPlayer from "./musicplayer";
 
 export default class Room extends Component {
   constructor(props) {
@@ -82,6 +82,9 @@ export default class Room extends Component {
       .then((data) => {
         this.setState({ song: data });
         console.log(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching current song:", error);
       });
   }
 
